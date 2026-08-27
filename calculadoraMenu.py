@@ -4,13 +4,19 @@
 objetivo completo:
 Uma aplicação desktop que permite realizar operações matemáticas básicas através de uma interface gráfica.
 
+FASE 2 — Persistência
+□ Criar arquivo TXT
+□ Salvar operações
+□ Ler operações do arquivo
+□ Limpar arquivo
+□ Tratar arquivo inexistente
 
-Etapa 2 — Lógica
-Criar função de soma
-Criar função de subtração
-Criar função de multiplicação
-Criar função de divisão
-Testar todas
+FASE 3 — Robustez
+□ Divisão por zero
+□ Valores inválidos
+□ Casos especiais da raiz
+□ Testar todas as operações
+
 Etapa 3 — Interface
 Criar janela
 Criar display
@@ -30,7 +36,7 @@ Corrigir bugs
 
 import calculadoraUtilidades
 import calculadoraFuncoes
-sistema = calculadoraFuncoes.HistoricoOperacoes()
+
 
 while True:
 
@@ -58,7 +64,7 @@ while True:
 
     elif menu_escolha == 5:
         calculadoraUtilidades.cabecalho('DIVISÃO INTEIRA')
-        print(f'A divisão inteira deu: {calculadoraFuncoes.dividir(calculadoraUtilidades.leiaFloat('Digite um número: '), calculadoraUtilidades.leiaFloat('Digite outro número para dividir o anterior: '))}')
+        print(f'A divisão inteira deu: {calculadoraFuncoes.dividirInteiro(calculadoraUtilidades.leiaFloat('Digite um número: '), calculadoraUtilidades.leiaFloat('Digite outro número para dividir o anterior: '))}')
 
     elif menu_escolha == 6:
         calculadoraUtilidades.cabecalho('POTÊNCIA')
@@ -74,9 +80,8 @@ while True:
 
     elif menu_escolha == 9:
         calculadoraUtilidades.cabecalho('VER HISTÓRICO')
+        calculadoraFuncoes.sistema.mostrar()
 
     elif menu_escolha == 10:
         calculadoraUtilidades.cabecalho('LIMPAR HISTÓRICO')
-
-    
-# repetir a lógica para as outras operações
+        calculadoraFuncoes.sistema.limpar()
