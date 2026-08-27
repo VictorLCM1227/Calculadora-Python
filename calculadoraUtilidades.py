@@ -1,3 +1,5 @@
+# CalculadoraUtilidades
+
 from rich import print
 from rich.table import Table
 
@@ -8,9 +10,6 @@ def cabecalho(txt):
     print(linha())
     print(txt.center(30))
     print(linha())
-
-def menu(lista):
-    cabecalho
 
 def leiaInt(msg):
     while True:
@@ -52,7 +51,7 @@ def leiaFloatPositivo(msg):
         else:
             if numero > 0:
                 return numero
-            print('[red]ERRO: Por favor, digite um número maior do que zero.')
+            print('[red]ERRO: Por favor, digite um número maior do que zero.[/]')
             continue
 
 def leiaNatural(msg):
@@ -68,5 +67,15 @@ def leiaNatural(msg):
         else:
             if numero >= 0:
                 return numero
-            print('[red]ERRO: Por favor, digite um número maior ou igual a zero.')
+            print('[red]ERRO: Por favor, digite um número maior ou igual a zero.[/]')
             continue
+
+def menu(titulo, lista):
+    cabecalho(titulo.upper())
+    c = 0
+    for item in lista:
+        print(f'{c} - {item}')
+        c += 1
+    print(linha())
+    opc = leiaNatural('Sua opção: ')
+    return opc
