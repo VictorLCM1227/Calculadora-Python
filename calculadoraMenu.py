@@ -33,9 +33,15 @@ Adicionar README
 Corrigir bugs
 
 '''
-
 import calculadoraUtilidades
 import calculadoraFuncoes
+
+arq = 'historico.txt'
+
+if not calculadoraFuncoes.arquivoExiste(arq):
+    calculadoraFuncoes.criarArquivo(arq)
+
+
 
 
 while True:

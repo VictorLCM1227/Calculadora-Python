@@ -79,3 +79,4 @@ def menu(titulo, lista):
     print(linha())
     opc = leiaNatural('Sua opção: ')
     return opc
+
