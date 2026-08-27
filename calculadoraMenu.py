@@ -1,13 +1,44 @@
 '''
+1. objetivo:
+Uma aplicação desktop que permite realizar operações matemáticas básicas através de uma interface gráfica.
+
+2. funcionalidades:
 somar
 multiplicar
 subtrair
 dividir
 divisao inteira
-limpar
-histórico
+limpar o resultado
+histórico salvo em txt
 porcentagem
 raiz
 potência
+limpar historico
+
+Etapa 1 — Estrutura
+Criar a pasta do projeto
+Criar os módulos
+Definir as dependências
+
+Etapa 2 — Lógica
+Criar função de soma
+Criar função de subtração
+Criar função de multiplicação
+Criar função de divisão
+Testar todas
+Etapa 3 — Interface
+Criar janela
+Criar display
+Criar botões numéricos
+Criar botões das operações
+Etapa 4 — Integração
+Conectar botões à lógica
+Mostrar resultados
+Tratar erros
+Etapa 5 — Finalização
+Melhorar visual
+Organizar código
+Adicionar README
+Corrigir bugs
 
 '''
