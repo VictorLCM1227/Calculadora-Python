@@ -4,18 +4,6 @@
 objetivo completo:
 Uma aplicação desktop que permite realizar operações matemáticas básicas através de uma interface gráfica.
 
-FASE 2 — Persistência
-□ Criar arquivo TXT
-□ Salvar operações
-□ Ler operações do arquivo
-□ Limpar arquivo
-□ Tratar arquivo inexistente
-
-FASE 3 — Robustez
-□ Divisão por zero
-□ Valores inválidos
-□ Casos especiais da raiz
-□ Testar todas as operações
 
 Etapa 3 — Interface
 Criar janela
@@ -66,11 +54,11 @@ while True:
 
     elif menu_escolha == 4:
         calculadoraUtilidades.cabecalho('DIVISÃO')
-        print(f'A divisão deu: {calculadoraFuncoes.dividir(calculadoraUtilidades.leiaFloat('Digite um número: '), calculadoraUtilidades.leiaFloat('Digite outro número para dividir o anterior: '))}')
+        print(f'A divisão deu: {calculadoraFuncoes.dividir(calculadoraUtilidades.leiaFloat('Digite um número: '), calculadoraUtilidades.leiaFloatNotZero('Digite outro número para dividir o anterior: '))}')
 
     elif menu_escolha == 5:
         calculadoraUtilidades.cabecalho('DIVISÃO INTEIRA')
-        print(f'A divisão inteira deu: {calculadoraFuncoes.dividirInteiro(calculadoraUtilidades.leiaFloat('Digite um número: '), calculadoraUtilidades.leiaFloat('Digite outro número para dividir o anterior: '))}')
+        print(f'A divisão inteira deu: {calculadoraFuncoes.dividirInteiro(calculadoraUtilidades.leiaFloat('Digite um número: '), calculadoraUtilidades.leiaFloatNotZero('Digite outro número para dividir o anterior: '))}')
 
     elif menu_escolha == 6:
         calculadoraUtilidades.cabecalho('POTÊNCIA')
@@ -82,7 +70,7 @@ while True:
 
     elif menu_escolha == 8:
         calculadoraUtilidades.cabecalho('PORCENTAGEM')
-        print(f'O resultado é: {calculadoraFuncoes.porcentagem(calculadoraUtilidades.leiaFloat('Digite um número: '), calculadoraUtilidades.leiaFloatPositivo('Digite o valor da porcentagem: '))}')
+        print(f'O resultado é: {calculadoraFuncoes.porcentagem(calculadoraUtilidades.leiaNatural('Digite um número: '), calculadoraUtilidades.leiaFloatPositivo('Digite o valor da porcentagem: '))}')
 
     elif menu_escolha == 9:
         calculadoraUtilidades.cabecalho('VER HISTÓRICO')

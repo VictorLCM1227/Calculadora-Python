@@ -1,41 +1,42 @@
 # CalculadoraFunções
+import os
 
 class HistoricoOperacoes:
     def __init__(self, nome='historico.txt'):
-        self.historico = []
         self.arq = nome
 
-    def adicionar(self, numero1, numero2, operacao, resultado, raiz=True):
-        if not raiz:
-            self.historico.append(f'operação: {numero1} {operacao} {numero2} = {resultado}')
-        else:
-            self.historico.append(f'raiz de índice {numero2} de {numero1} = {resultado}')
+    def adicionar(self, numero1, numero2, operacao, resultado, raiz=False):
         try:
             a = open(self.arq, 'at+')
-        except:
+        except FileNotFoundError:
             print('Houve um ERRO na abertura do arquivo!')
         else:
             try:
-                a.write(f'{self.historico[0]}\n')
+                if not raiz:
+                    a.write(f'operação: {numero1} {operacao} {numero2} = {resultado}\n')
+                else:
+                    a.write(f'raiz de índice {numero2} de {numero1} = {resultado}\n')
             except:
                 print('Houve um ERRO na hora de escrever os dados!')
             else:
                 a.close()
-        self.historico.clear()
 
     def mostrar(self):
         try:
             a = open(self.arq, 'rt')
-        except:
-            print('ERRO ao ler o arquivo')
+        except FileNotFoundError:
+            print('Histórico vazio')
         else:
             for linha in a:
                 print(linha)
-        finally:
             a.close()
 
     def limpar(self):
-        self.historico.clear()
+        try:
+            os.remove(self.arq)
+            print('Arquivo excluído com sucesso.')
+        except FileNotFoundError:
+            print('O arquivo não foi encontrado.')
 
 sistema = HistoricoOperacoes()
         
@@ -60,7 +61,7 @@ def dividir(numero1, numero2):
     return resultado
 
 def dividirInteiro(numero1, numero2):
-    resultado = numero1 % numero2
+    resultado = numero1 // numero2
     sistema.adicionar(numero1, numero2, operacao='//', resultado=resultado)
     return resultado
 

@@ -38,6 +38,22 @@ def leiaFloat(msg):
         else:
             return numero
 
+def leiaFloatNotZero(msg):
+    while True:
+        try:
+            while True:
+                numero = float(input(msg))
+                if numero != 0:
+                    break
+        except (ValueError, TypeError):
+            print('[red]ERRO: Por favor, digite um número real válido diferente de zero.[/]')
+            continue
+        except KeyboardInterrupt:
+            print('[red]Usuário preferiu não digitar esse número.[/]')
+            return 0
+        else:
+            return numero
+
 def leiaFloatPositivo(msg):
     while True:
         try:
