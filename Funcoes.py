@@ -1,100 +1,142 @@
-# CalculadoraFunções
+# funcoes.py
+
 import os
 
+from utilidades import criar_arquivo
+
+
+# ============================================================
+# HISTÓRICO
+# ============================================================
+
 class HistoricoOperacoes:
+
     def __init__(self, nome='historico.txt'):
         self.arq = nome
 
-    def adicionar(self, numero1, numero2, operacao, resultado, raiz=False):
+        # Garante que o arquivo exista
+        criar_arquivo(self.arq)
+
+
+    def adicionar(self, numero1, numero2, operacao, resultado):
+        """
+        Adiciona uma operação ao histórico.
+        """
+
         try:
-            a = open(self.arq, 'at+')
-        except FileNotFoundError:
-            print('Houve um ERRO na abertura do arquivo!')
-        else:
-            try:
-                if not raiz:
-                    a.write(f'operação: {numero1} {operacao} {numero2} = {resultado}\n')
-                else:
-                    a.write(f'raiz de índice {numero2} de {numero1} = {resultado}\n')
-            except:
-                print('Houve um ERRO na hora de escrever os dados!')
-            else:
-                a.close()
+
+            with open(self.arq, 'a', encoding='utf-8') as arquivo:
+
+                arquivo.write(
+                    f'{numero1} {operacao} {numero2} = {resultado}\n'
+                )
+
+        except OSError as erro:
+
+            print(f'Erro ao salvar no histórico: {erro}')
+
 
     def mostrar(self):
+        """
+        Retorna todo o conteúdo do histórico.
+        """
+
         try:
-            a = open(self.arq, 'rt')
+
+            with open(self.arq, 'r', encoding='utf-8') as arquivo:
+
+                historico = arquivo.read()
+
+                if historico == '':
+                    return 'O histórico está vazio.'
+
+                return historico
+
         except FileNotFoundError:
-            print('Histórico vazio')
-        else:
-            for linha in a:
-                print(linha)
-            a.close()
+
+            return 'O histórico está vazio.'
+
 
     def limpar(self):
-        try:
-            os.remove(self.arq)
-            print('Arquivo excluído com sucesso.')
-        except FileNotFoundError:
-            print('O arquivo não foi encontrado.')
+        """
+        Limpa o histórico.
+        """
 
+        try:
+
+            with open(self.arq, 'w', encoding='utf-8') as arquivo:
+                pass
+
+            return True
+
+        except OSError as erro:
+
+            print(f'Erro ao limpar histórico: {erro}')
+            return False
+
+
+# Objeto responsável pelo histórico
 sistema = HistoricoOperacoes()
-        
+
+
+# ============================================================
+# OPERAÇÕES MATEMÁTICAS
+# ============================================================
+
 def somar(numero1, numero2):
-    soma = numero1 + numero2
-    sistema.adicionar(numero1, numero2, operacao='+', resultado=soma)
-    return soma
+
+    resultado = numero1 + numero2
+
+    sistema.adicionar(
+        numero1,
+        numero2,
+        '+',
+        resultado
+    )
+
+    return resultado
+
 
 def subtrair(numero1, numero2):
-    subtracao = numero1 - numero2
-    sistema.adicionar(numero1, numero2, operacao='-', resultado=subtracao)
-    return subtracao
+
+    resultado = numero1 - numero2
+
+    sistema.adicionar(
+        numero1,
+        numero2,
+        '-',
+        resultado
+    )
+
+    return resultado
+
 
 def multiplicar(numero1, numero2):
-    produto = numero1 * numero2
-    sistema.adicionar(numero1, numero2, operacao='*', resultado=produto)
-    return produto
+
+    resultado = numero1 * numero2
+
+    sistema.adicionar(
+        numero1,
+        numero2,
+        '×',
+        resultado
+    )
+
+    return resultado
+
 
 def dividir(numero1, numero2):
+
+    if numero2 == 0:
+        raise ZeroDivisionError
+
     resultado = numero1 / numero2
-    sistema.adicionar(numero1, numero2, operacao='/', resultado=resultado)
+
+    sistema.adicionar(
+        numero1,
+        numero2,
+        '÷',
+        resultado
+    )
+
     return resultado
-
-def dividirInteiro(numero1, numero2):
-    resultado = numero1 // numero2
-    sistema.adicionar(numero1, numero2, operacao='//', resultado=resultado)
-    return resultado
-
-def potenciar(numero1, numero2):
-    resultado = numero1 ** numero2
-    sistema.adicionar(numero1, numero2, operacao='**', resultado=resultado)
-    return resultado
-
-def radiciar(numero1, numero2):
-    resultado = numero1 ** (1 / numero2)
-    sistema.adicionar(numero1, numero2, operacao='√', resultado=resultado)
-    return resultado
-
-def porcentagem(numero1, numero2):
-    resultado = numero1 * (numero2 / 100)
-    sistema.adicionar(numero1, numero2, operacao='%', resultado=resultado)
-    return resultado
-
-def arquivoExiste(nome):
-    try:
-        a = open(nome, 'rt')
-        a.close()
-    except FileNotFoundError:
-        return False
-    else:
-        return True
-
-
-def criarArquivo(nome):
-    try:
-        a = open(nome, 'wt+')
-        a.close()
-    except:
-        print('Houve um ERRO na criação do arquivo!')
-    else:
-        print(f'Arquivo {nome} criado com sucesso!')

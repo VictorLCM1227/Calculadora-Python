@@ -1,98 +1,36 @@
-# CalculadoraUtilidades
+# utilidades.py
 
-from rich import print
-from rich.table import Table
-
-def linha(tamanho=30):
-    return '-' * tamanho
-
-def cabecalho(txt):
-    print(linha())
-    print(txt.center(30))
-    print(linha())
-
-def leiaInt(msg):
-    while True:
-        try:
-            numero = int(input(msg))
-        except (ValueError, TypeError):
-            print('[red]ERRO: Por favor, digite um número inteiro válido.[/]')
-            continue
-        except KeyboardInterrupt:
-            print('[red]Usuário preferiu não digitar esse número.[/]')
-            return 0
-        else:
-            return numero
+import os
 
 
-def leiaFloat(msg):
-    while True:
-        try:
-            numero = float(input(msg))
-        except (ValueError, TypeError):
-            print('[red]ERRO: Por favor, digite um número real válido.[/]')
-            continue
-        except KeyboardInterrupt:
-            print('[red]Usuário preferiu não digitar esse número.[/]')
-            return 0
-        else:
-            return numero
+def arquivo_existe(nome):
+    """
+    Verifica se um arquivo existe.
+    """
 
-def leiaFloatNotZero(msg):
-    while True:
-        try:
-            while True:
-                numero = float(input(msg))
-                if numero != 0:
-                    break
-        except (ValueError, TypeError):
-            print('[red]ERRO: Por favor, digite um número real válido diferente de zero.[/]')
-            continue
-        except KeyboardInterrupt:
-            print('[red]Usuário preferiu não digitar esse número.[/]')
-            return 0
-        else:
-            return numero
+    return os.path.exists(nome)
 
-def leiaFloatPositivo(msg):
-    while True:
-        try:
-            numero = float(input(msg))
-        except (ValueError, TypeError):
-            print('[red]ERRO: Por favor, digite um número real válido.[/]')
-            continue
-        except KeyboardInterrupt:
-            print('[red]Usuário preferiu não digitar esse número.[/]')
-            return 0
-        else:
-            if numero > 0:
-                return numero
-            print('[red]ERRO: Por favor, digite um número maior do que zero.[/]')
-            continue
 
-def leiaNatural(msg):
-    while True:
-        try:
-            numero = float(input(msg))
-        except (ValueError, TypeError):
-            print('[red]ERRO: Por favor, digite um número real válido.[/]')
-            continue
-        except KeyboardInterrupt:
-            print('[red]Usuário preferiu não digitar esse número.[/]')
-            return 0
-        else:
-            if numero >= 0:
-                return numero
-            print('[red]ERRO: Por favor, digite um número maior ou igual a zero.[/]')
-            continue
+def criar_arquivo(nome):
+    """
+    Cria um arquivo caso ele não exista.
+    """
 
-def menu(titulo, lista):
-    cabecalho(titulo.upper())
-    c = 0
-    for item in lista:
-        print(f'{c} - {item}')
-        c += 1
-    print(linha())
-    opc = leiaNatural('Sua opção: ')
-    return opc
+    try:
+        with open(nome, 'a', encoding='utf-8'):
+            pass
 
+    except OSError as erro:
+        print(f'Erro ao criar o arquivo: {erro}')
+
+
+def formatar_resultado(resultado):
+    """
+    Formata o resultado para evitar mostrar .0
+    quando o número é inteiro.
+    """
+
+    if resultado == int(resultado):
+        return str(int(resultado))
+
+    return str(resultado)
